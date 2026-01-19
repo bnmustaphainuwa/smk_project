@@ -1,4 +1,4 @@
-# AquaFlow - Bottled Water E-commerce Platform
+# BERAIN WATER - Bottled Water E-commerce Platform
 
 A professional web application built with **Django** designed for a bottled water company. This platform allows customers to browse various water products and place orders directly through the website.
 
