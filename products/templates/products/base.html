@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+
+    <title>Berain {% if title %}- {{ title }}{% endif %}</title>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding-top: 80px; /* Space so content isn't hidden under fixed navbar */
+            background-color: #f8f9fa;
+        }
+
+        /* NAVBAR STYLING */
+        .navbar {
+            background: rgba(26, 37, 47, 0.98); 
+            border-bottom: 2px solid #17a2b8;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: #17a2b8 !important;
+            letter-spacing: 1px;
+        }
+
+        /* Enable Hover for the User Dropdown on Desktop */
+        @media (min-width: 992px) {
+            .nav-item.dropdown:hover .dropdown-menu {
+                display: block;
+                margin-top: 0;
+            }
+        }
+
+        .dropdown-menu {
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border: none;
+        }
+
+        /* FOOTER STYLING */
+        footer {
+            background: linear-gradient(to top, #002d52, #1a252f); 
+            color: white;
+        }
+        footer a:hover {
+             color: #17a2b8 !important; 
+             transition: 0.3s;
+             text-decoration: none;
+        }
+
+        .main-wrapper { flex: 1; }
+    </style>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'products' %}">💧 Berain</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'products' %}">Our Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'about' %}">About Us</a>
+            </li>
+
+            <li class="nav-item dropdown ml-lg-3">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-person-circle" viewBox="0 0 16 16">
+                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                </svg>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                <a class="dropdown-item py-2" href="#">Sign In</a>
+                <a class="dropdown-item py-2" href="#">Register</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item py-2 text-secondary" href="#">Help</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="main-wrapper">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer class="pt-5 pb-4 mt-5">
+        <div class="container text-center text-md-left">
+            <div class="row">
+                <div class="col-md-3 mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-info">Berain Table Water</h5>
+                    <p>Clean, pure hydration delivered to your home or office anywhere in Nigeria.</p>
+                </div>
+                <div class="col-md-2 mt-3 ml-auto">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-info">Links</h5>
+                    <p><a href="#" class="text-white">Home</a></p>
+                    <p><a href="{% url 'products' %}" class="text-white">Our Products</a></p>
+                    <p><a href="{% url 'about' %}" class="text-white">About Us</a></p>
+                </div>
+                <div class="col-md-4 mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-info">Contact</h5>
+                    <p>📍 Kano, Nigeria</p>
+                    <p>📧  sensitivemmkamala@gmail.com</p>
+                    <p>📞 +234 800-WATER</p>
+                </div>
+            </div>
+            <hr class="mb-4" style="background-color: rgba(255,255,255,0.1);">
+            <div class="row align-items-center">
+                <div class="col-md-7 text-md-left">
+                    <p><strong class="text-info">© 2026 Sensitive MM Kamala General Enterprise LTD.</strong></p>
+                </div>
+                <div class="col-md-5 text-md-right">
+                    <a href="#" class="text-white mx-2">FB</a>
+                    <a href="#" class="text-white mx-2">IG</a>
+                    <a href="#" class="text-white mx-2">TW</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
