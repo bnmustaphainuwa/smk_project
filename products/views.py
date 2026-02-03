@@ -2,6 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Product 
 
+# home view
+def home(request):
+    return render(request, 'products/home.html')
+
 # products view
 def products(request):
     # 1. Grab the data

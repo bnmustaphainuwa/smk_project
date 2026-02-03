@@ -1,8 +1,148 @@
 {% extends 'products/base.html' %}
+{% load static %}
 
 {% block content %}
-    <div class="product-grid">
-        <h1>here's is the company about</h1>
-    </div>
-{% endblock content %}
+<style>
+    /* --- HERO & GENERAL STYLING --- */
+    .home-hero {
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+        margin-top: -32px;
+        overflow: hidden;
+    }
 
+    #hero-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 70%;
+        min-height: 70%;
+        width: auto;
+        height: auto;
+        z-index: -2;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.35);
+        z-index: -1;
+    }
+
+    .btn-berain {
+        background-color: #17a2b8;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: bold;
+        transition: 0.3s;
+        border: none;
+        text-decoration: none;
+        display: inline-block;
+        margin: 5px;
+    }
+
+    .btn-berain:hover {
+        background-color: #138496;
+        transform: translateY(-3px);
+        color: white;
+    }
+
+    /* --- DYNAMIC TRANSITION CLASSES (The "Magic") --- */
+    .reveal {
+        position: relative;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1.2s ease-out;
+    }
+
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .section-title { color: #333; font-weight: 800; }
+    .image-wrapper img { border-radius: 20px; transition: 0.5s ease; }
+    .image-wrapper img:hover { transform: scale(1.03); }
+</style>
+
+<section class="home-hero">
+    <video autoplay muted loop playsinline id="hero-video">
+        <source src="{% static 'products/videos/berainVdoMotion.mp4' %}" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    
+    <div class="container reveal active" style="z-index: 1;">
+        <h1 class="display-1 fw-bold mb-3">Purely Refined.</h1>
+        <p class="lead mb-5 fs-3">Experience the gold standard of hydration with Berain Table Water.</p>
+        <div class="d-flex justify-content-center gap-3">
+            {% comment %} <a href="{% url 'products' %}" class="btn-berain">View Our Products</a>
+            <a href="{% url 'about' %}" class="btn-berain">Learn More</a>      {% endcomment %}
+        </div>
+    </div>
+</section>
+
+<section class="delivery-section py-5 bg-white reveal">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <h6 class="text-info fw-bold text-uppercase mb-3">Logistics & Supply</h6>
+                <h2 class="display-5 section-title mb-4">Seamless Hydration, <br><span style="color: #17a2b8;">Delivered Nationwide.</span></h2>
+                <p class="lead text-muted mb-4">From our facilities in Kano, we deliver Berain products anywhere in the country. Our dedicated fleet ensures you never run out of pure hydration.</p>
+                <a href="{% url 'about' %}" class="btn-berain">Learn More</a>
+            </div>
+            <div class="col-md-6">
+                <div class="image-wrapper shadow-sm">
+                    <img src="{% static 'products/images/logisticTwo.jpeg' %}" class="img-fluid w-100" alt="Berain Delivery">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hydration-section py-5 reveal" style="background-color: #f9f9f9;">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-md-6 order-2 order-md-1">
+                <div class="image-wrapper shadow-lg">
+                    <img src="{% static 'products/images/hydration.png' %}" class="img-fluid w-100" alt="Stay Hydrated">
+                </div>
+            </div>
+            <div class="col-md-6 ps-md-5 order-1 order-md-2 mb-4 mb-md-0">
+                <h6 class="text-info fw-bold text-uppercase mb-3">Wellness</h6>
+                <h2 class="display-5 section-title mb-4">The Importance of <span style="color: #17a2b8;">Staying Hydrated</span></h2>
+                <p class="lead text-muted">Water represents over 60% of an adult's body weight. Choosing Berain ensures you are fueling your body with the purest minerals.</p>
+                <a href="{% url 'products' %}" class="btn-berain">Stay Hydrated</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const observerOptions = {
+        threshold: 0.15 // Triggers when 15% of the section is visible
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    // Apply the observer to all sections with the 'reveal' class
+    document.querySelectorAll('.reveal').forEach((section) => {
+        observer.observe(section);
+    });
+</script>
+
+{% endblock content %}
